@@ -7,6 +7,7 @@ import thunkMiddleware from 'redux-thunk';
 import middlewareLogger from './middleware/middleware-logger';
 import parksReducer from './reducers/parks-reducer';
 import { Provider } from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(
   parksReducer, 
