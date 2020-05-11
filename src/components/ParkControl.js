@@ -2,8 +2,9 @@ import React from 'react'
 import ParkList from './ParkList';
 import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
-import { makeApiCall } from './../actions';
+import { makeApiCall, makeApiPostCall } from './../actions';
 import { Container, Button } from 'react-bootstrap';
+import NewParkForm from './NewParkForm';
 
 class ParkControl extends React.Component {
   constructor(props) {
@@ -11,7 +12,16 @@ class ParkControl extends React.Component {
     this.state = {
       searched: false,
       searchLocation: null,
-      searchName: null
+      searchName: null,
+      newParkFormVisible: false
+    }
+  }
+
+  handleClick = () => {
+    if (this.state.newParkFormVisible) {
+      this.setState({newParkFormVisible: false});
+    } else {
+      this.setState({newParkFormVisible: true});
     }
   }
 
@@ -34,6 +44,11 @@ class ParkControl extends React.Component {
 
   showButton = () => {
     return (this.state.searched) ? <Button variant="outline-dark" onClick={this.resetParkList}>SHOW ALL PARKS</Button> : null
+  }
+
+  handleAddingNewParkToDb = (parkObj) => {
+    const { dispatch } = this.props;
+    dispatch(makeApiPostCall(parkObj));
   }
 
   render() {
@@ -62,15 +77,29 @@ class ParkControl extends React.Component {
       } else {
         parkList = parks;
       }
+
+      let currentView;
+      let buttonText;
+      if (this.state.newParkFormVisible) {
+        currentView = <NewParkForm onNewParkFormSubmission={this.handleAddingNewParkToDb} />
+        buttonText = "return to park list";
+      } else {
+        currentView = (
+          <div style={parkControlStyles}>
+            <ParkList parkList={parkList}/>
+            <div className="secondColumn">
+              <SearchForm onSearchSubmission={this.onSearchSubmission} />
+              {this.showButton()}
+            </div>
+          </div>
+        );
+        buttonText = "add new park";
+      }
+
       return (
       <Container style={containerStyles}>
-        <div style={parkControlStyles}>
-          <ParkList parkList={parkList}/>
-          <div className="secondColumn">
-            <SearchForm onSearchSubmission={this.onSearchSubmission} />
-            {this.showButton()}
-          </div>
-        </div>
+        <Button variant="outline-success" onClick={this.handleClick}>{buttonText}</Button>
+        {currentView}
       </Container>
       );
     }
