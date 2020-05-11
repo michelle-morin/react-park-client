@@ -14,6 +14,7 @@ function SearchForm(props) {
 
   return(
     <React.Fragment>
+      <h3>Search:</h3>
       <Form onSubmit={handleSearch}>
         <Form.Group>
           <Form.Label>Park Name:</Form.Label>
