@@ -37,6 +37,16 @@ class ParkControl extends React.Component {
   }
 
   render() {
+    const parkControlStyles = {
+      display: 'flex',
+      justifyContent: 'space-between',
+    }
+    const containerStyles = {
+      paddingTop: '5%',
+      paddingBottom: '5%',
+      paddingLeft: '2%',
+      paddingRight: '2%'
+    }
     const { error, isLoading, parks } = this.props;
     
     if (error) {
@@ -53,11 +63,14 @@ class ParkControl extends React.Component {
         parkList = parks;
       }
       return (
-      <Container>
-        <h1>Parks</h1>
-        <ParkList parkList={parkList}/>
-        <SearchForm onSearchSubmission={this.onSearchSubmission} />
-        {this.showButton()}
+      <Container style={containerStyles}>
+        <div style={parkControlStyles}>
+          <ParkList parkList={parkList}/>
+          <div className="secondColumn">
+            <SearchForm onSearchSubmission={this.onSearchSubmission} />
+            {this.showButton()}
+          </div>
+        </div>
       </Container>
       );
     }
