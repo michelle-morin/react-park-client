@@ -66,3 +66,7 @@ _Open the contents of the directory in a text editor or IDE of your choice (e.g.
 [MIT](https://choosealicense.com/licenses/mit/)
 
 Copyright &copy; 2020 **_Michelle Morin, Jamison Cozart, Brandan Sayarath, Drake Wilcox_**
+
+Co-authored-by: Drake Wilcox <drakewilcox@gmail.com>
+Co-authored-by: Jamison Cozart <jamisoncozart@gmail.com>
+Co-authored-by: Brandan Sayarath <brandan@brandan.tech>
