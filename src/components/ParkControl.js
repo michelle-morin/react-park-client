@@ -1,4 +1,5 @@
 import React from 'react'
+import ParkList from './ParkList';
 import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
 
@@ -22,14 +23,7 @@ class ParkControl extends React.Component {
       return (
       <React.Fragment>
         <h1>Parks</h1>
-        <ul>
-        {parks.map((park, index) => 
-          <li key={index}>
-            <h3 key={index}>{park.name}</h3>
-            <p>{park.state}</p>
-          </li>
-        )}
-        </ul>
+        <ParkList parkList={parks}/>
       </React.Fragment>
       );
     }
