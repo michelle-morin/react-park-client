@@ -1,66 +1,47 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { makeApiCall } from './../actions';
 
 class ParkControl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      parks: []
-    };
-  }
-
-  makeApiCall = () => {
-    fetch("http://localhost:5000/api/Parks")
-    .then(response => response.json())
-    .then(
-        (jsonifiedResponse) => {
-          console.log(jsonifiedResponse);
-          if (jsonifiedResponse.status === 200 && jsonifiedResponse.ok) {
-            this.setState({
-              isLoaded: true,
-              parks: jsonifiedResponse.results
-            });
-          } else {
-            return false;
-          }
-        })
-    .catch((error) => {
-      this.setState({
-        isLoaded: true,
-        error
-      });
-    })
   }
 
   componentDidMount() {
-    this.makeApiCall();
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
   }
 
   render() {
-    const { error, isLoaded, parks } = this.state;
+    const { error, isLoading, parks } = this.props;
     if (error) {
       return <React.Fragment>Error: {error.message}</React.Fragment>
-    } else if (!isLoaded) {
+    } else if (isLoading) {
       return <React.Fragment>Loading...</React.Fragment>
     } else {
       return (
       <React.Fragment>
-        <h1>Park Control</h1>
+        <h1>Parks</h1>
+        <ul>
         {parks.map((park, index) => 
-          <div key={index}>
-            <h3>{park.name}</h3>
-            <ul>
-              <li>{park.state}</li>
-            </ul>
-          </div>
+          <li key={index}>
+            <h3 key={index}>{park.name}</h3>
+            <p>{park.state}</p>
+          </li>
         )}
+        </ul>
       </React.Fragment>
-      )
-
+      );
     }
   }
 }
 
-export default ParkControl
+const mapStateToProps = state => {
+  return {
+    parks: state.parks,
+    isLoading: state.isLoading,
+    error: state.error
+  }
+}
+
+export default connect(mapStateToProps)(ParkControl);
