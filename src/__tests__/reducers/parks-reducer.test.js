@@ -10,6 +10,11 @@ describe('parksReducer', () => {
     parks: [], 
     error: null
   };
+  const loadingState = {
+    isLoading: true, 
+    parks: [], 
+    error: null
+  };
 
   test('should successfully return the default state if no action is passed into it', () => {
     expect(parksReducer(defaultState, {type: null})).toEqual(
@@ -30,7 +35,23 @@ describe('parksReducer', () => {
       isLoading: true, 
       parks: [],
       error: null
-    })
-  })
+    });
+  });
+
+  test('successfully getting parks should change isLoading to false and update parks', () => {
+    const parks = "A Park";
+    action = {
+      type: c.GET_PARKS_SUCCESS, 
+      parks
+    };
+
+    expect(parksReducer(loadingState, action)).toEqual({
+      isLoading: false, 
+      parks: "A Park", 
+      error: null
+    });
+  });
+
+
 
 })
