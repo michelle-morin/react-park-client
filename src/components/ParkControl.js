@@ -1,11 +1,18 @@
 import React from 'react'
 import ParkList from './ParkList';
+import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
+import { Container, Button } from 'react-bootstrap';
 
 class ParkControl extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searched: false,
+      searchLocation: null,
+      searchName: null
+    }
   }
 
   componentDidMount() {
@@ -13,18 +20,45 @@ class ParkControl extends React.Component {
     dispatch(makeApiCall());
   }
 
+  onSearchSubmission = (searchObject) => {
+    console.log('onSearchSubmission');
+    const { name, location } = searchObject;
+    let nameQuery = (name !== "") ? name : "";
+    let locationQuery = (location !== "") ? location : "";
+    this.setState({searched: true, searchLocation: locationQuery, searchName: nameQuery});
+  }
+
+  resetParkList = () => {
+    this.setState({searched: false, searchLocation: null, searchName: null});
+  }
+
+  showButton = () => {
+    return (this.state.searched) ? <Button variant="outline-dark" onClick={this.resetParkList}>SHOW ALL PARKS</Button> : null
+  }
+
   render() {
     const { error, isLoading, parks } = this.props;
+    
     if (error) {
       return <React.Fragment>Error: {error.message}</React.Fragment>
     } else if (isLoading) {
       return <React.Fragment>Loading...</React.Fragment>
     } else {
+      let parkList;
+      if (this.state.searchName !== null || this.state.searchLocation !== null) {
+        parkList = parks.filter((park) => {
+          return park.name.includes(this.state.searchName) && park.state.includes(this.state.searchLocation);
+        });
+      } else {
+        parkList = parks;
+      }
       return (
-      <React.Fragment>
+      <Container>
         <h1>Parks</h1>
-        <ParkList parkList={parks}/>
-      </React.Fragment>
+        <ParkList parkList={parkList}/>
+        <SearchForm onSearchSubmission={this.onSearchSubmission} />
+        {this.showButton()}
+      </Container>
       );
     }
   }
