@@ -1,18 +1,21 @@
 import React from 'react';
+import Park from './Park';
 import PropTypes from 'prop-types';
 
 function ParkList(props) {
+
+  const parkListStyles = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap'
+  };
+
   return (
-    <React.Fragment>
-      <ul>
+    <div style={parkListStyles}>
       {props.parkList.map((park, index) => 
-        <li key={index}>
-          <h3 key={index}>{park.name}</h3>
-          <p>{park.state}</p>
-        </li>
+        <Park key={index} currentPark={park} />
       )}
-      </ul>
-    </React.Fragment>
+    </div>
   );
 }
 
