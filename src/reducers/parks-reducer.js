@@ -4,4 +4,4 @@ const defaultState = {
   error: null
 }
 
-export default(state=defaultState, action) => {};
+export default(state=defaultState, action) => state;
