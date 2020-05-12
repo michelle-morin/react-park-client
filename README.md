@@ -7,7 +7,7 @@
 _This React frontend application interacts with a custom .NET [Parks Lookup](https://github.com/michelle-morin/ParkAPI) web api._
 
 ## Component Tree / Wireframe
-![component tree](diagram.png)
+![component tree](component-tree.png)
 
 ## Specification User Stories
 * As a user, I want to be able to view a list of all parks.
