@@ -54,19 +54,33 @@ class ParkControl extends React.Component {
       },
       body: JSON.stringify(parkObj)
     });
+    this.setState({newParkFormVisible: false});
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
+  }
+
+  handleParkDeletion = async (id) => {
+    await fetch(`http://localhost:5000/api/parks/${id}`, {
+      method: 'DELETE'
+    })
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
   }
 
   render() {
     const parkControlStyles = {
       display: 'flex',
       justifyContent: 'space-between',
+      flex: '50%'
     }
+
     const containerStyles = {
       paddingTop: '5%',
       paddingBottom: '5%',
       paddingLeft: '2%',
       paddingRight: '2%'
     }
+
     const { error, isLoading, parks } = this.props;
     
     if (error) {
@@ -91,7 +105,10 @@ class ParkControl extends React.Component {
       } else {
         currentView = (
           <div style={parkControlStyles}>
-            <ParkList parkList={parkList}/>
+            <ParkList 
+              parkList={parkList}
+              handleDeletingPark = {this.handleParkDeletion} 
+            />
             <div className="secondColumn">
               <SearchForm onSearchSubmission={this.onSearchSubmission} />
               {this.showButton()}

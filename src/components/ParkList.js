@@ -13,14 +13,15 @@ function ParkList(props) {
   return (
     <div style={parkListStyles}>
       {props.parkList.map((park, index) => 
-        <Park key={index} currentPark={park} />
+        <Park key={index} currentPark={park} handleDeletingPark={props.handleDeletingPark} />
       )}
     </div>
   );
 }
 
 ParkList.propTypes = {
-  parkList: PropTypes.array
+  parkList: PropTypes.array,
+  handleDeletingPark: PropTypes.func
 }
 
 export default ParkList;

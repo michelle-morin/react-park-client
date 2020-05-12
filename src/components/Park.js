@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 function Park(props) {
@@ -7,7 +7,7 @@ function Park(props) {
     width: '30%',
     margin: '1%'
   }
-  const { currentPark } = props;
+  const { currentPark, handleDeletingPark } = props;
 
   let campsiteAvailability;
   if (currentPark.campsites) {
@@ -25,6 +25,7 @@ function Park(props) {
           <p>Managed by: {currentPark.agency}</p>
           <p>Campsites? {campsiteAvailability}</p>
           <p>{currentPark.description}</p>
+          <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE PARK</Button>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -33,7 +34,8 @@ function Park(props) {
 
 Park.propTypes = {
   currentPark: PropTypes.object,
-  key: PropTypes.number
+  key: PropTypes.number,
+  handleDeletingPark: PropTypes.func
 }
 
 export default Park;
