@@ -1,13 +1,13 @@
 # React Park Client
 
 #### By: Michelle Morin, Jamison Cozart, Brandan Sayarath, Drake Wilcox
-#### May 11, 2020
+#### May 11-13, 2020
 
 ## Description
 _This React frontend application interacts with a custom .NET [Parks Lookup](https://github.com/michelle-morin/ParkAPI) web api._
 
 ## Component Tree / Wireframe
-![component tree](diagram.png)
+![component tree](component-tree.png)
 
 ## Specification User Stories
 * As a user, I want to be able to view a list of all parks.

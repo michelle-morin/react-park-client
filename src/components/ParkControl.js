@@ -2,9 +2,10 @@ import React from 'react'
 import ParkList from './ParkList';
 import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
-import { makeApiCall, makeApiPostCall } from './../actions';
-import { Container, Button } from 'react-bootstrap';
+import { makeApiCall } from './../actions';
+import { Container, Button, Card } from 'react-bootstrap';
 import NewParkForm from './NewParkForm';
+import EditParkForm from './EditParkForm';
 
 class ParkControl extends React.Component {
   constructor(props) {
@@ -13,12 +14,16 @@ class ParkControl extends React.Component {
       searched: false,
       searchLocation: null,
       searchName: null,
-      newParkFormVisible: false
+      newParkFormVisible: false,
+      editingFormVisible: false,
+      selectedPark: null
     }
   }
 
   handleClick = () => {
-    if (this.state.newParkFormVisible) {
+    if (this.state.selectedPark !== null) {
+      this.setState({editingFormVisible: false, selectedPark: null});
+    } else if (this.state.newParkFormVisible) {
       this.setState({newParkFormVisible: false});
     } else {
       this.setState({newParkFormVisible: true});
@@ -46,22 +51,68 @@ class ParkControl extends React.Component {
     return (this.state.searched) ? <Button variant="outline-dark" onClick={this.resetParkList}>SHOW ALL PARKS</Button> : null
   }
 
-  handleAddingNewParkToDb = (parkObj) => {
+  showReturnToParksButton = () => {
+    return (this.state.editingFormVisible || this.state.newParkFormVisible) ? <Button variant="outline-dark" onClick={() => this.handleClick()}>RETURN TO PARK LIST</Button>
+    : null
+  }
+
+  handleAddingNewParkToDb = async (parkObj) => {
+    await fetch('http://localhost:5000/api/parks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(parkObj)
+    });
+    this.setState({newParkFormVisible: false});
     const { dispatch } = this.props;
-    dispatch(makeApiPostCall(parkObj));
+    dispatch(makeApiCall());
+  }
+
+  handleParkDeletion = async (id) => {
+    await fetch(`http://localhost:5000/api/parks/${id}`, {
+      method: 'DELETE'
+    })
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
+  }
+
+  handleEditClick = (parkObj) => {
+    console.log("handleEditClick reached!");
+    console.log(parkObj);
+    this.setState({
+      selectedPark: parkObj, 
+      editingFormVisible: true
+    });
+    console.log("selected park " + this.selectedPark);
+  }
+
+  handleEditingPark = async (parkObj) => {
+    const id = parkObj.parkId;
+    await fetch(`http://localhost:5000/api/parks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(parkObj)
+    });
+    this.setState({
+      editingFormVisible: false, 
+      selectedPark: null
+    });
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
   }
 
   render() {
-    const parkControlStyles = {
-      display: 'flex',
-      justifyContent: 'space-between',
-    }
+
     const containerStyles = {
       paddingTop: '5%',
       paddingBottom: '5%',
       paddingLeft: '2%',
       paddingRight: '2%'
     }
+
     const { error, isLoading, parks } = this.props;
     
     if (error) {
@@ -79,26 +130,28 @@ class ParkControl extends React.Component {
       }
 
       let currentView;
-      let buttonText;
-      if (this.state.newParkFormVisible) {
+      if (this.state.editingFormVisible) {
+        currentView = <EditParkForm onEditFormSubmission={this.handleEditingPark} currentPark={this.state.selectedPark} />
+      } else if (this.state.newParkFormVisible) {
         currentView = <NewParkForm onNewParkFormSubmission={this.handleAddingNewParkToDb} />
-        buttonText = "return to park list";
       } else {
         currentView = (
-          <div style={parkControlStyles}>
-            <ParkList parkList={parkList}/>
-            <div className="secondColumn">
-              <SearchForm onSearchSubmission={this.onSearchSubmission} />
-              {this.showButton()}
-            </div>
-          </div>
+          <React.Fragment>
+            <SearchForm onSearchSubmission={this.onSearchSubmission} />
+            <ParkList 
+              parkList={parkList}
+              handleDeletingPark = {this.handleParkDeletion} 
+              onEditClick = {this.handleEditClick}
+              handleClick={this.handleClick}
+            />
+            {this.showButton()}
+          </React.Fragment>
         );
-        buttonText = "add new park";
       }
 
       return (
-      <Container style={containerStyles}>
-        <Button variant="outline-success" onClick={this.handleClick}>{buttonText}</Button>
+      <Container fluid style={containerStyles}>
+        {this.showReturnToParksButton()}
         {currentView}
       </Container>
       );

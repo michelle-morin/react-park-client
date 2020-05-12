@@ -3,9 +3,9 @@ import ParkControl from './ParkControl';
 
 function App() {
   return (
-    <React.Fragment>
+    <div className="App">
       <ParkControl/>
-    </React.Fragment>
+    </div>
   );
 }
 

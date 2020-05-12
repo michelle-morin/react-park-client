@@ -12,21 +12,41 @@ function SearchForm(props) {
     });
   }
 
+  const formStyles = {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: 'auto',
+    minHeight: '18vh',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#111111',
+    color: '#f5f5f5'
+  }
+
+  const labelStyles = {
+    marginLeft: '2%',
+    marginRight: '1%',
+    fontSize: '1.5rem'
+  }
+
+  const mainLabelStyles = {
+    marginLeft: '2%',
+    fontSize: '3rem'
+  }
+
   return(
-    <React.Fragment>
-      <h3>Search:</h3>
-      <Form onSubmit={handleSearch}>
-        <Form.Group>
-          <Form.Label>Park Name:</Form.Label>
-          <Form.Control type="text" name="name" />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Park Location (state):</Form.Label>
-          <Form.Control type="text" name="location" />
-        </Form.Group>
-        <Button variant="outline-dark" type="submit">SEARCH</Button>
-      </Form>
-    </React.Fragment>
+    <Form style={formStyles} onSubmit={handleSearch}>
+      <Form.Label style={mainLabelStyles}>Search for a park!</Form.Label>
+      <Form.Label style={labelStyles}>Park Name:</Form.Label>
+      <input type="text" name="name" />
+      <Form.Label style={labelStyles}>Park Location (state):</Form.Label>
+      <input type="text" name="location" />
+      <Button style={labelStyles} variant="outline-light" type="submit">SEARCH</Button>
+    </Form>
   );
 }
 
