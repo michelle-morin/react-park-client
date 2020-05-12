@@ -7,7 +7,22 @@ function Park(props) {
     width: '30%',
     margin: '1%'
   }
-  const { currentPark, handleDeletingPark } = props;
+
+  const buttonStyles = {
+    display: 'flex',
+    justifyContent: 'space-around'
+  }
+
+  const { currentPark, handleDeletingPark, handleEditClick } = props;
+
+  // const parkToEdit = {
+  //   parkId: currentPark.parkId,
+  //   agency: currentPark.agency,
+  //   description: currentPark.description,
+  //   campsites: currentPark.campsites,
+  //   name: currentPark.name,
+  //   state: currentPark.state
+  // };
 
   let campsiteAvailability;
   if (currentPark.campsites) {
@@ -15,7 +30,6 @@ function Park(props) {
   } else {
     campsiteAvailability = "No";
   }
-  
   return (
     <Card style={cardStyles}>
       <Card.Body>
@@ -25,7 +39,10 @@ function Park(props) {
           <p>Managed by: {currentPark.agency}</p>
           <p>Campsites? {campsiteAvailability}</p>
           <p>{currentPark.description}</p>
-          <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE PARK</Button>
+          <div style={buttonStyles}>
+            <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
+            <Button variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
+          </div>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -35,7 +52,8 @@ function Park(props) {
 Park.propTypes = {
   currentPark: PropTypes.object,
   key: PropTypes.number,
-  handleDeletingPark: PropTypes.func
+  handleDeletingPark: PropTypes.func,
+  handleEditClick: PropTypes.func
 }
 
 export default Park;

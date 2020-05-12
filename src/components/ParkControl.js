@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
 import { Container, Button } from 'react-bootstrap';
 import NewParkForm from './NewParkForm';
+import EditParkForm from './EditParkForm';
 
 class ParkControl extends React.Component {
   constructor(props) {
@@ -13,12 +14,16 @@ class ParkControl extends React.Component {
       searched: false,
       searchLocation: null,
       searchName: null,
-      newParkFormVisible: false
+      newParkFormVisible: false,
+      editingFormVisible: false,
+      selectedPark: null
     }
   }
 
   handleClick = () => {
-    if (this.state.newParkFormVisible) {
+    if (this.state.selectedPark !== null) {
+      this.setState({editingFormVisible: false, selectedPark: null});
+    } else if (this.state.newParkFormVisible) {
       this.setState({newParkFormVisible: false});
     } else {
       this.setState({newParkFormVisible: true});
@@ -67,6 +72,32 @@ class ParkControl extends React.Component {
     dispatch(makeApiCall());
   }
 
+  handleEditClick = (parkObj) => {
+    console.log("handleEditClick reached!");
+    console.log(parkObj);
+    this.setState({
+      selectedPark: parkObj, 
+      editingFormVisible: true
+    });
+    console.log("selected park " + this.selectedPark);
+  }
+
+  handleEditingPark = async (parkObj) => {
+    await fetch(`http://localhost:5000/api/parks/${parkObj.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(parkObj)
+    });
+    this.setState({
+      editingFormVisible: false, 
+      selectedPark: null
+    });
+    const { dispatch } = this.props;
+    dispatch(makeApiCall());
+  }
+
   render() {
     const parkControlStyles = {
       display: 'flex',
@@ -99,7 +130,10 @@ class ParkControl extends React.Component {
 
       let currentView;
       let buttonText;
-      if (this.state.newParkFormVisible) {
+      if (this.state.editingFormVisible) {
+        currentView = <EditParkForm onEditFormSubmission={this.handleEditingPark} currentPark={this.state.selectedPark} />
+        buttonText = "return to park list";
+      } else if (this.state.newParkFormVisible) {
         currentView = <NewParkForm onNewParkFormSubmission={this.handleAddingNewParkToDb} />
         buttonText = "return to park list";
       } else {
@@ -108,6 +142,7 @@ class ParkControl extends React.Component {
             <ParkList 
               parkList={parkList}
               handleDeletingPark = {this.handleParkDeletion} 
+              onEditClick = {this.handleEditClick}
             />
             <div className="secondColumn">
               <SearchForm onSearchSubmission={this.onSearchSubmission} />

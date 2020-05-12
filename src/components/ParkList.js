@@ -9,11 +9,12 @@ function ParkList(props) {
     justifyContent: 'space-around',
     flexWrap: 'wrap'
   };
+  console.log(props.parkList);
 
   return (
     <div style={parkListStyles}>
       {props.parkList.map((park, index) => 
-        <Park key={index} currentPark={park} handleDeletingPark={props.handleDeletingPark} />
+        <Park key={index} currentPark={park} handleDeletingPark={props.handleDeletingPark} handleEditClick={props.onEditClick} />
       )}
     </div>
   );
@@ -21,7 +22,8 @@ function ParkList(props) {
 
 ParkList.propTypes = {
   parkList: PropTypes.array,
-  handleDeletingPark: PropTypes.func
+  handleDeletingPark: PropTypes.func,
+  onEditClick: PropTypes.func
 }
 
 export default ParkList;
