@@ -9,7 +9,6 @@ function ParkList(props) {
     justifyContent: 'space-around',
     flexWrap: 'wrap'
   };
-  console.log(props.parkList);
 
   return (
     <div style={parkListStyles}>
