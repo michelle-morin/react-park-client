@@ -2,7 +2,7 @@ import React from 'react'
 import ParkList from './ParkList';
 import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
-import { makeApiCall, makeApiPostCall } from './../actions';
+import { makeApiCall } from './../actions';
 import { Container, Button } from 'react-bootstrap';
 import NewParkForm from './NewParkForm';
 
@@ -46,9 +46,14 @@ class ParkControl extends React.Component {
     return (this.state.searched) ? <Button variant="outline-dark" onClick={this.resetParkList}>SHOW ALL PARKS</Button> : null
   }
 
-  handleAddingNewParkToDb = (parkObj) => {
-    const { dispatch } = this.props;
-    dispatch(makeApiPostCall(parkObj));
+  handleAddingNewParkToDb = async (parkObj) => {
+    await fetch('http://localhost:5000/api/parks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(parkObj)
+    });
   }
 
   render() {

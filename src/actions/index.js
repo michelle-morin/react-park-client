@@ -28,18 +28,24 @@ export const makeApiCall = () => {
   }
 }
 
-// need to figure out where to put URL for this post request
-export const postPark = (park) => ({
-  type: c.POST_PARK,
-  name: park.name,
-  state: park.state,
-  agency: park.agency,
-  campsites: park.campsites,
-  description: park.description
-});
+// export const postPark = (park) => ({
+//   type: c.POST_PARK,
+//   name: park.name,
+//   state: park.state,
+//   agency: park.agency,
+//   campsites: park.campsites,
+//   description: park.description
+// });
 
-export const makeApiPostCall = (park) => {
-  return dispatch => {
-    dispatch(postPark(park));
-  }
-}
+// export const makeApiPostCall = (park) => {
+//   return dispatch => {
+//     dispatch(postPark(park));
+//     return fetch('http://localhost:5000/api/parks', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(park)
+//     })
+//   }
+// }
