@@ -100,11 +100,6 @@ class ParkControl extends React.Component {
   }
 
   render() {
-    const parkControlStyles = {
-      display: 'flex',
-      justifyContent: 'space-between',
-      flex: '50%'
-    }
 
     const containerStyles = {
       paddingTop: '5%',
@@ -139,23 +134,21 @@ class ParkControl extends React.Component {
         buttonText = "return to park list";
       } else {
         currentView = (
-          <div style={parkControlStyles}>
+          <React.Fragment>
+            <SearchForm onSearchSubmission={this.onSearchSubmission} />
             <ParkList 
               parkList={parkList}
               handleDeletingPark = {this.handleParkDeletion} 
               onEditClick = {this.handleEditClick}
             />
-            <div className="secondColumn">
-              <SearchForm onSearchSubmission={this.onSearchSubmission} />
-              {this.showButton()}
-            </div>
-          </div>
+            {this.showButton()}
+          </React.Fragment>
         );
         buttonText = "add new park";
       }
 
       return (
-      <Container style={containerStyles}>
+      <Container fluid style={containerStyles}>
         <Button variant="outline-success" onClick={this.handleClick}>{buttonText}</Button>
         {currentView}
       </Container>

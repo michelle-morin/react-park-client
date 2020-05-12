@@ -15,12 +15,19 @@ function Park(props) {
   const cardStyles = {
     width: '500px',
     height: '500px',
-    margin: '1%',
     borderRadius: '10px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '2%'
+    padding: '2%',
+    textAlign: 'center'
+  }
+
+  const outerDivStyles = {
+    width: '500px',
+    height: '500px',
+    marginTop: '1%',
+    marginBottom: '1%'
   }
 
   const buttonStyles = {
@@ -38,25 +45,25 @@ function Park(props) {
   }
 
   return (
-    <div key={currentPark.parkId} onClick={() => flipCard(state => !state)}>
-        <a.div className="c" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
-          <Card style={cardStyles}>
-            <h1>{currentPark.name}</h1>
-          </Card>
-        </a.div>
+    <div style={outerDivStyles} key={currentPark.parkId} onClick={() => flipCard(state => !state)}>
+      <a.div className="c" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
+        <Card style={cardStyles}>
+          <h1>{currentPark.name}</h1>
+        </Card>
+      </a.div>
 
-        <a.div className="c" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }}>
-          <Card style={cardStyles}>
-            <p>Location: {currentPark.state}</p>
-            <p>Managed by: {currentPark.agency}</p>
-            <p>Campsites? {campsiteAvailability}</p>
-            <p>{currentPark.description}</p>
-            <div style={buttonStyles}>
-              <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
-              <Button variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
-            </div>
-          </Card>
-        </a.div>
+      <a.div className="c" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }}>
+        <Card style={cardStyles}>
+          <p>Location: {currentPark.state}</p>
+          <p>Managed by: {currentPark.agency}</p>
+          <p>Campsites? {campsiteAvailability}</p>
+          <p>{currentPark.description}</p>
+          <div style={buttonStyles}>
+            <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
+            <Button variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
+          </div>
+        </Card>
+      </a.div>
         {/* <Card.Title>{currentPark.name}</Card.Title>
         <Card.Text>
           <p>Location: {currentPark.state}</p>
