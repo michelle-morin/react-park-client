@@ -25,7 +25,7 @@ function ParkList(props) {
   const innerButtonStyle = {
     width: '100%',
     height: '100%',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'transparent',
     color: '#111111',
     border: '2px solid #111111',
     fontSize: '2.5rem'
