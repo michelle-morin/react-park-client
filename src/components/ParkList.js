@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 function ParkList(props) {
 
   const parkListStyles = {
+    position: 'relative',
+    top: '10vh',
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap'

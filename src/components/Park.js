@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useSpring, animated as a } from 'react-spring';
 
 function Park(props) {
+  const { currentPark, handleDeletingPark, handleEditClick } = props;
 
   const [flipped, flipCard] = useState(false);
   const { transform, opacity } = useSpring({
@@ -13,6 +14,8 @@ function Park(props) {
   });
 
   const cardStyles = {
+    backgroundColor: '#111111',
+    color: '#f5f5f5',
     width: '500px',
     height: '500px',
     borderRadius: '10px',
@@ -20,7 +23,23 @@ function Park(props) {
     justifyContent: 'center',
     alignItems: 'center',
     padding: '2%',
-    textAlign: 'center'
+    textAlign: 'center',
+    boxShadow: '0 10px 10px 0 rgba(0,0,0,0.10)'
+  }
+
+  const frontCardStyles = {
+    backgroundImage: `url(${currentPark.imgUrl})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    width: '500px',
+    height: '500px',
+    borderRadius: '10px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '2%',
+    textAlign: 'center',
+    boxShadow: '0 10px 10px 0 rgba(0,0,0,0.10)'
   }
 
   const outerDivStyles = {
@@ -35,7 +54,10 @@ function Park(props) {
     justifyContent: "space-between"
   }
 
-  const { currentPark, handleDeletingPark, handleEditClick } = props;
+  const singleButton = {
+    marginLeft: '2%',
+    marginRight: '2%'
+  }
 
   let campsiteAvailability;
   if (currentPark.campsites) {
@@ -47,8 +69,8 @@ function Park(props) {
   return (
     <div style={outerDivStyles} key={currentPark.parkId} onClick={() => flipCard(state => !state)}>
       <a.div className="c" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
-        <Card style={cardStyles}>
-          <h1>{currentPark.name}</h1>
+        <Card style={frontCardStyles}>
+          <h1 className='parkTitle'>{currentPark.name}</h1>
         </Card>
       </a.div>
 
@@ -59,8 +81,8 @@ function Park(props) {
           <p>Campsites? {campsiteAvailability}</p>
           <p>{currentPark.description}</p>
           <div style={buttonStyles}>
-            <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
-            <Button variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
+            <Button style={singleButton} variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
+            <Button style={singleButton}variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
           </div>
         </Card>
       </a.div>
