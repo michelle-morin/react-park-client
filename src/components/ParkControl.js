@@ -83,7 +83,8 @@ class ParkControl extends React.Component {
   }
 
   handleEditingPark = async (parkObj) => {
-    await fetch(`http://localhost:5000/api/parks/${parkObj.id}`, {
+    const id = parkObj.parkId;
+    await fetch(`http://localhost:5000/api/parks/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
