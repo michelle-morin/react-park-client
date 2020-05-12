@@ -1,7 +1,7 @@
 # React Park Client
 
 #### By: Michelle Morin, Jamison Cozart, Brandan Sayarath, Drake Wilcox
-#### May 11, 2020
+#### May 11-13, 2020
 
 ## Description
 _This React frontend application interacts with a custom .NET [Parks Lookup](https://github.com/michelle-morin/ParkAPI) web api._
