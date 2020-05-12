@@ -3,7 +3,7 @@ import ParkList from './ParkList';
 import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Card } from 'react-bootstrap';
 import NewParkForm from './NewParkForm';
 import EditParkForm from './EditParkForm';
 
@@ -49,6 +49,11 @@ class ParkControl extends React.Component {
 
   showButton = () => {
     return (this.state.searched) ? <Button variant="outline-dark" onClick={this.resetParkList}>SHOW ALL PARKS</Button> : null
+  }
+
+  showReturnToParksButton = () => {
+    return (this.state.editingFormVisible || this.state.newParkFormVisible) ? <Button variant="outline-dark" onClick={() => this.handleClick()}>RETURN TO PARK LIST</Button>
+    : null
   }
 
   handleAddingNewParkToDb = async (parkObj) => {
@@ -125,13 +130,10 @@ class ParkControl extends React.Component {
       }
 
       let currentView;
-      let buttonText;
       if (this.state.editingFormVisible) {
         currentView = <EditParkForm onEditFormSubmission={this.handleEditingPark} currentPark={this.state.selectedPark} />
-        buttonText = "return to park list";
       } else if (this.state.newParkFormVisible) {
         currentView = <NewParkForm onNewParkFormSubmission={this.handleAddingNewParkToDb} />
-        buttonText = "return to park list";
       } else {
         currentView = (
           <React.Fragment>
@@ -140,16 +142,16 @@ class ParkControl extends React.Component {
               parkList={parkList}
               handleDeletingPark = {this.handleParkDeletion} 
               onEditClick = {this.handleEditClick}
+              handleClick={this.handleClick}
             />
             {this.showButton()}
           </React.Fragment>
         );
-        buttonText = "add new park";
       }
 
       return (
       <Container fluid style={containerStyles}>
-        <Button variant="outline-success" onClick={this.handleClick}>{buttonText}</Button>
+        {this.showReturnToParksButton()}
         {currentView}
       </Container>
       );

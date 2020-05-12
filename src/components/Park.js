@@ -86,17 +86,6 @@ function Park(props) {
           </div>
         </Card>
       </a.div>
-        {/* <Card.Title>{currentPark.name}</Card.Title>
-        <Card.Text>
-          <p>Location: {currentPark.state}</p>
-          <p>Managed by: {currentPark.agency}</p>
-          <p>Campsites? {campsiteAvailability}</p>
-          <p>{currentPark.description}</p>
-          <div style={buttonStyles}>
-            <Button variant="outline-danger" onClick={()=> handleDeletingPark(currentPark.parkId)}>DELETE</Button>
-            <Button variant="outline-warning" onClick={()=> handleEditClick(currentPark)}>EDIT</Button>
-          </div>
-        </Card.Text> */}
     </div>
   );
 }
