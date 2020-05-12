@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 export default function EditParkForm(props) {
   const { currentPark, onEditFormSubmission } = props;
 
+  const textareaStyles = {
+    display: 'block',
+    width: '100%',
+    borderRadius: '5px'
+  }
+
   const editPark = (event) => {
     event.preventDefault();
     const updatedParkValues = {
@@ -34,7 +40,7 @@ export default function EditParkForm(props) {
       </Form.Group>
       <Form.Group>
         <Form.Label>Description:</Form.Label>
-        <Form.Control type="text" name="description" defaultValue={currentPark.description} />
+        <textarea style={textareaStyles} type="text" name="description" defaultValue={currentPark.description} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Campsite Availability:</Form.Label>
