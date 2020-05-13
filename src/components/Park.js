@@ -43,6 +43,7 @@ function Park(props) {
   }
 
   const outerDivStyles = {
+    borderRadius: '10px',
     width: '500px',
     height: '500px',
     marginTop: '1%',
@@ -67,7 +68,7 @@ function Park(props) {
   }
 
   return (
-    <div style={outerDivStyles} key={currentPark.parkId} onClick={() => flipCard(state => !state)}>
+    <div className="park-card" style={outerDivStyles} key={currentPark.parkId} onClick={() => flipCard(state => !state)}>
       <a.div className="c" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
         <Card style={frontCardStyles}>
           <h1 className='parkTitle'>{currentPark.name}</h1>

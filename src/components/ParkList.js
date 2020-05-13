@@ -34,7 +34,7 @@ function ParkList(props) {
 
   return (
     <div style={parkListStyles}>
-      <Card style={reusedButton}>
+      <Card className="reused-button" style={reusedButton}>
         <Button style={innerButtonStyle} onClick={() => props.handleClick()}>ADD NEW PARK</Button>
       </Card>
       {props.parkList.map((park, index) => 
