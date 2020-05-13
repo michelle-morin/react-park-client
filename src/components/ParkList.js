@@ -7,7 +7,7 @@ function ParkList(props) {
 
   const parkListStyles = {
     position: 'relative',
-    top: '15vh',
+    top: '5vh',
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap'

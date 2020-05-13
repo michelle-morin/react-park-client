@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Navbar, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 function SearchForm(props) {
@@ -17,29 +17,25 @@ function SearchForm(props) {
     top: '0',
     left: '0',
     width: '100%',
-    height: '18vh',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#111111',
-    color: '#f5f5f5',
-    paddingLeft: '15%',
-    paddingRight: '15%'
+    color: '#f5f5f5'
   }
 
-  const mainLabelStyles = {
-    fontSize: '3rem',
+  const mainStyles = {
+    fontSize: '2rem',
   }
 
   return(
-    <div style={formStyles}>
-      <h2 style={mainLabelStyles}>Search Parks!</h2><br/>
-      <Form onSubmit={handleSearch}>
-        <Form.Control type="text" name="name" placeholder="Park Name"/><br/>
-        <Form.Control type="text" name="location" placeholder="State" /><br/>
-        <Button variant="outline-light" type="submit">SEARCH</Button>
-      </Form>
-    </div>
+    <Navbar collapseOnSelect bg="dark" expand="lg" variant="dark" style={formStyles}>
+      <Navbar.Brand style={mainStyles}>Park Finder</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Form inline className="ml-auto" onSubmit={handleSearch}>
+          <Form.Control type="text" name="name" placeholder="Park Name"/><br/>
+          <Form.Control type="text" name="location" placeholder="State" /><br/>
+          <Button variant="outline-light" type="submit">SEARCH</Button>
+        </Form>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 
