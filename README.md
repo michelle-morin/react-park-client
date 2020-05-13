@@ -74,6 +74,7 @@ _Open the contents of this application in a text editor or IDE of your choice (e
 * Custom-built .NET Web API (https://github.com/michelle-morin/ParkAPI)
 * React Bootstrap component library
 * React-Spring animations
+* React-Helmet for SEO
 
 ### License
 
