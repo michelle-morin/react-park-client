@@ -47,7 +47,8 @@ function Park(props) {
     width: '500px',
     height: '500px',
     marginTop: '1%',
-    marginBottom: '1%'
+    marginBottom: '1%',
+    marginRight: '0.5%'
   }
 
   const buttonStyles = {
