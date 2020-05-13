@@ -50,7 +50,7 @@ _Clone the ParkAPI repository by entering the following commands in Terminal (ma
 #### Install this application
 
 _In a separate Terminal or PowerShell, navigate to the directory where you would like to clone this application (e.g., the destop) and clone this repository by entering the following commands:_
-* ``git clone {url to this repo}``
+* ``git clone https://github.com/michelle-morin/react-park-client``
 * ``cd park-client``
 _Confirm that you have navigated to the park-client project directory (e.g., by entering ``pwd``)._
 
