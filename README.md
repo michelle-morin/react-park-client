@@ -34,19 +34,28 @@ _Next, install Node.js by entering the following command in Terminal:_
 ###### For Windows:
 _Please visit the [Node.js website](https://nodejs.org/en/download/) for installation instructions._
 
+#### Install the ParksLookup WebAPI
+
+_Clone the ParkAPI repository by entering the following commands in Terminal (macOS) or PowerShell (Windows):_
+* ``cd desktop``
+* ``git clone https://github.com/michelle-morin/ParkAPI``
+* ``cd ParkAPI/ParksLookup``
+* ``dotnet restore``
+* ``dotnet ef database update``
+* ``dotnet watch run``
+
 #### Install this application
 
-_Clone this repository via Terminal using the following commands:_
-* ``cd desktop``
+_In a separate Terminal or PowerShell, navigate to the directory where you would like to clone this application (e.g., the destop) and clone this repository by entering the following commands:_
 * ``git clone {url to this repo}``
 * ``cd park-client``
-_Confirm that you have navigated to the park-client project directory (e.g., by entering ``pwd`` in Terminal)._
+_Confirm that you have navigated to the park-client project directory (e.g., by entering ``pwd``)._
 
 _Next, install npm at the project's root directory by entering the following commands in Terminal (macOS) or PowerShell (Windows):_
 * ``npm install``
 * ``npm start``
 
-_Open the contents of the directory in a text editor or IDE of your choice (e.g., to open the contents of the directory in Visual Studio Code on macOS, enter the command ``code .`` in Terminal)._
+_Open the contents of this application in a text editor or IDE of your choice (e.g., to open the contents of the directory in Visual Studio Code on macOS, enter the command ``code .`` in Terminal)._
 
 ## Technologies Used
 
@@ -60,6 +69,7 @@ _Open the contents of the directory in a text editor or IDE of your choice (e.g.
 * React Thunk Middleware
 * Fetch library
 * Custom-built .NET Web API (https://github.com/michelle-morin/ParkAPI)
+* React-Spring animations
 
 ### License
 
