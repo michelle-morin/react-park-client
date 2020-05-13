@@ -14,23 +14,28 @@ export default function NewParkForm(props) {
       imgUrl: event.target.imgUrl.value
     });
   }
+
+  const inputStyle = {
+    color: '#111111'
+  };
+  
   return (
     <Form onSubmit={addNewPark}>
       <Form.Group>
         <Form.Label>Park Name:</Form.Label>
-        <Form.Control type="text" name="name" required/>
+        <Form.Control style={inputStyle} type="text" name="name" required/>
       </Form.Group>
       <Form.Group>
         <Form.Label>State where park is located:</Form.Label>
-        <Form.Control type="text" name="location" required/>
+        <Form.Control style={inputStyle} type="text" name="location" required/>
       </Form.Group>
       <Form.Group>
         <Form.Label>Agency that manages the park:</Form.Label>
-        <Form.Control type="text" name="agency" required />
+        <Form.Control style={inputStyle} type="text" name="agency" required />
       </Form.Group>
       <Form.Group>
         <Form.Label>Description:</Form.Label>
-        <Form.Control type="text" name="description" required/>
+        <Form.Control style={inputStyle} type="text" name="description" required/>
       </Form.Group>
       <Form.Group>
         <Form.Label>Campsite Availability:</Form.Label>
@@ -41,7 +46,7 @@ export default function NewParkForm(props) {
       </Form.Group>
       <Form.Group>
         <Form.Label>Image URL:</Form.Label>
-        <Form.Control type="text" name="imgUrl" />
+        <Form.Control style={inputStyle} type="text" name="imgUrl" />
       </Form.Group>
       <Button variant="outline-dark" type="submit">ADD PARK</Button>
     </Form>

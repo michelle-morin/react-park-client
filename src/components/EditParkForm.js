@@ -11,6 +11,10 @@ export default function EditParkForm(props) {
     borderRadius: '5px'
   }
 
+  const inputStyle = {
+    color: '#111111'
+  }
+
   const editPark = (event) => {
     event.preventDefault();
     const updatedParkValues = {
@@ -29,15 +33,15 @@ export default function EditParkForm(props) {
     <Form onSubmit={editPark}>
       <Form.Group>
         <Form.Label>Park Name:</Form.Label>
-        <Form.Control type="text" name="name" defaultValue={currentPark.name} />
+        <Form.Control style={inputStyle} type="text" name="name" defaultValue={currentPark.name} />
       </Form.Group>
       <Form.Group>
         <Form.Label>State where park is located:</Form.Label>
-        <Form.Control type="text" name="location" defaultValue={currentPark.state} />
+        <Form.Control style={inputStyle} type="text" name="location" defaultValue={currentPark.state} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Agency that manages the park:</Form.Label>
-        <Form.Control type="text" name="agency" defaultValue={currentPark.agency}  />
+        <Form.Control style={inputStyle} type="text" name="agency" defaultValue={currentPark.agency}  />
       </Form.Group>
       <Form.Group>
         <Form.Label>Description:</Form.Label>
@@ -52,7 +56,7 @@ export default function EditParkForm(props) {
       </Form.Group>
       <Form.Group>
         <Form.Label>Image URL:</Form.Label>
-        <Form.Control type="text" name="imgUrl" defaultValue={currentPark.imgUrl} />
+        <Form.Control style={inputStyle} type="text" name="imgUrl" defaultValue={currentPark.imgUrl} />
       </Form.Group>
       <Button variant="outline-dark" type="submit">SAVE CHANGES</Button>
     </Form>

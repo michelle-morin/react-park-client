@@ -138,13 +138,13 @@ class ParkControl extends React.Component {
         currentView = (
           <React.Fragment>
             <SearchForm onSearchSubmission={this.onSearchSubmission} />
+            {this.showButton()}
             <ParkList 
               parkList={parkList}
               handleDeletingPark = {this.handleParkDeletion} 
               onEditClick = {this.handleEditClick}
               handleClick={this.handleClick}
             />
-            {this.showButton()}
           </React.Fragment>
         );
       }
