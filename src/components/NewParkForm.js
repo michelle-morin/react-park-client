@@ -41,7 +41,7 @@ export default function NewParkForm(props) {
       </Form.Group>
       <Form.Group>
         <Form.Label>Image URL:</Form.Label>
-        <Form.Control type="text" name="imgUrl" defaultValue={currentPark.imgUrl} />
+        <Form.Control type="text" name="imgUrl" />
       </Form.Group>
       <Button variant="outline-dark" type="submit">ADD PARK</Button>
     </Form>

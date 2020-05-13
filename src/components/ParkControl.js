@@ -3,7 +3,7 @@ import ParkList from './ParkList';
 import SearchForm from './SearchForm';
 import { connect } from 'react-redux';
 import { makeApiCall } from './../actions';
-import { Container, Button, Card } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import NewParkForm from './NewParkForm';
 import EditParkForm from './EditParkForm';
 
