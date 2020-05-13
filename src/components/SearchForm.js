@@ -29,7 +29,7 @@ function SearchForm(props) {
   }
 
   const mainLabelStyles = {
-    fontSize: '2rem',
+    fontSize: '3rem',
   }
 
   return(
