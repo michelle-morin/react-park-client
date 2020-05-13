@@ -28,7 +28,8 @@ function ParkList(props) {
     backgroundColor: 'transparent',
     color: '#111111',
     border: '2px solid #111111',
-    fontSize: '2.5rem'
+    fontSize: '2.5rem',
+    borderRadius: '10px'
   };
 
   return (
