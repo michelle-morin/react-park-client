@@ -19,7 +19,8 @@ export default function EditParkForm(props) {
       state: event.target.location.value,
       agency: event.target.agency.value,
       description: event.target.description.value,
-      campsites: event.target.campsites.value
+      campsites: event.target.campsites.value,
+      imgUrl: event.target.imgUrl.value
     };
     onEditFormSubmission(updatedParkValues);
   }
@@ -48,6 +49,10 @@ export default function EditParkForm(props) {
         <input type="radio" name="campsites" value="true" />
         <label>No</label>
         <input type="radio" name="campsites" value="false" checked />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Image URL:</Form.Label>
+        <Form.Control type="text" name="imgUrl" defaultValue={currentPark.imgUrl} />
       </Form.Group>
       <Button variant="outline-dark" type="submit">SAVE CHANGES</Button>
     </Form>

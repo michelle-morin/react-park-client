@@ -10,7 +10,8 @@ export default function NewParkForm(props) {
       state: event.target.location.value,
       agency: event.target.agency.value,
       description: event.target.description.value,
-      campsites: event.target.campsites.value
+      campsites: event.target.campsites.value,
+      imgUrl: event.target.imgUrl.value
     });
   }
   return (
@@ -37,6 +38,10 @@ export default function NewParkForm(props) {
         <input type="radio" name="campsites" value="true" checked required/>
         <label>No</label>
         <input type="radio" name="campsites" value="false" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Image URL:</Form.Label>
+        <Form.Control type="text" name="imgUrl" defaultValue={currentPark.imgUrl} />
       </Form.Group>
       <Button variant="outline-dark" type="submit">ADD PARK</Button>
     </Form>
