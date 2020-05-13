@@ -20,33 +20,27 @@ function SearchForm(props) {
     height: 'auto',
     minHeight: '18vh',
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#111111',
-    color: '#f5f5f5'
-  }
-
-  const labelStyles = {
-    marginLeft: '2%',
-    marginRight: '1%',
-    fontSize: '1.5rem'
+    color: '#f5f5f5',
+    paddingLeft: '15%',
+    paddingRight: '15%'
   }
 
   const mainLabelStyles = {
-    marginLeft: '2%',
-    fontSize: '3rem'
+    fontSize: '2rem',
   }
 
   return(
-    <Form style={formStyles} onSubmit={handleSearch}>
-      <Form.Label style={mainLabelStyles}>Search for a park!</Form.Label>
-      <Form.Label style={labelStyles}>Park Name:</Form.Label>
-      <input type="text" name="name" />
-      <Form.Label style={labelStyles}>Park Location (state):</Form.Label>
-      <input type="text" name="location" />
-      <Button style={labelStyles} variant="outline-light" type="submit">SEARCH</Button>
-    </Form>
+    <div style={formStyles}>
+      <h2 style={mainLabelStyles}>Search Parks!</h2><br/>
+      <Form onSubmit={handleSearch}>
+        <Form.Control type="text" name="name" placeholder="Park Name"/><br/>
+        <Form.Control type="text" name="location" placeholder="State" /><br/>
+        <Button variant="outline-light" type="submit">SEARCH</Button>
+      </Form>
+    </div>
   );
 }
 
